@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input[type="text"], 
+    .form-group input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    .form-group button#loginButton {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .form-group button#loginButton:hover {
+      background-color: #0056b3;
+    }
+    .form-group button#signupButton {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px; 
+    }
+    .form-group button#signupButton:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js'
+    import { getAuth, signInWithEmailAndPassword} from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js'
+
+    const firebaseConfig = {
+            apiKey: "CONFIDENTIAL",
+            authDomain: "CONFIDENTIAL",
+            projectId: "CONFIDENTIAL",
+            storageBucket: "CONFIDENTIAL",
+            messagingSenderId: "CONFIDENTIAL",
+            appId: "CONFIDENTIAL",
+            measurementId: "CONFIDENTIAL"
+        };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the login button element
+      const loginButton = document.getElementById('loginButton');
+      const signupButton = document.getElementById('signupButton');
+
+      // Add event listener to the login button
+      loginButton.addEventListener('click', function() {
+        // Call the firebaseLogin function
+        firebaseLogin();
+      });
+
+      signupButton.addEventListener('click', function() {
+        window.location.href = "signup.html";
+      });
+
+      // Function to handle Firebase login
+      function firebaseLogin() {
+        // Firebase login logic
+        var email = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+    
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            var user = userCredential.user;
+            console.log('User logged in:', user);
+            alert("Login successful!");
+            window.location.href = "myaccount.html";
+          })
+          .catch((error) => {
+            var errorMessage = error.message;
+            console.error('Login error:', errorMessage);
+            alert(errorMessage);
+          });
+      }
+    });
+  </script>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="return false;">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="form-group">
+        <button type="button" id="loginButton">Login with Firebase</button>
+      </div>
+      <div class="form-group">
+        <button type="button" id="signupButton">Sign Up</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

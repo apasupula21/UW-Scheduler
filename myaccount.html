@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .button, .btn, .add-class, .login-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .button:hover, .btn:hover, .add-class:hover, .login-button:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            text-align: center;
+        }
+        .user-info {
+            margin-bottom: 20px;
+        }
+        .user-info label {
+            font-weight: bold;
+        }
+        .user-info p {
+            margin: 5px 0;
+        }
+        .classes-list {
+            margin-top: 20px;
+        }
+        .classes-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .classes-list li {
+            margin-bottom: 10px;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 20px;
+        }
+        nav a:hover {
+            background-color: #ddd;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/1cf483120b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="search-input">
+            <a href="" target="_blank" hidden></a>
+               <input type="text" placeholder="Type to search.." id = "search-bar">
+               <input type="text" placeholder="Lecture Number" id="lecture-number">
+               <div class="autocom-box">
+               </div>
+               <div class="icon"><i class="fas fa-search"></i></div>
+        </div>
+        <script type = "module" src="index.js"></script>
+        </div>
+    <div class="container">
+        <h2>My Account</h2>
+        <div class="user-info">
+            <label for="username">Name:</label>
+            <p id="username"></p>
+        </div>
+        <div class="user-info">
+            <label for="email">Email:</label>
+            <p id="userEmail"></p>
+        </div>
+        
+        <div class="classes-list">
+            <h3>Enrolled Classes:</h3>
+            <ul id="classesList">
+                <!-- Classes will be dynamically added here -->
+            </ul>
+        </div>
+        <div style="text-align: center;">
+            <button type = "button" id = "addClassButton" class = "button">Add Class</Button>
+            <button type = "button" id = "deleteButton" class = "button">Delete Account</button>
+            <button type="button" id="logoutButton" class="button">Log Out</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';
+        import { getAuth, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';
+        import { getFirestore, collection, doc, getDoc, setDoc, arrayUnion } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "CONFIDENTIAL",
+            authDomain: "CONFIDENTIAL",
+            projectId: "CONFIDENTIAL",
+            storageBucket: "CONFIDENTIAL",
+            messagingSenderId: "CONFIDENTIAL",
+            appId: "CONFIDENTIAL",
+            measurementId: "CONFIDENTIAL"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Set auth persistence
+        setPersistence(auth, browserLocalPersistence)
+            .catch((error) => {
+                console.error('Error setting persistence:', error);
+            });
+
+        let currentClasses = []; // Declare a global variable to hold the current classes
+
+        async function gettingDoc(user) {
+            const docRef = doc(db, 'users', user.email);
+            const docSnap = await getDoc(docRef);
+            const usernameElement = document.getElementById('username');
+
+            if (docSnap.exists()) {
+                usernameElement.textContent = docSnap.data().name;
+                currentClasses = docSnap.data().classes || []; // Initialize currentClasses
+                updateClassesList(currentClasses); // Update the UI with current classes
+            } else {
+                console.log("No such document!");
+            }
+        }
+
+        function updateUI(user) {
+            const userEmailElement = document.getElementById('userEmail');
+            const usernameElement = document.getElementById('username');
+            if (user) {
+                userEmailElement.textContent = user.email;
+                gettingDoc(user);
+            } else {
+                userEmailElement.textContent = 'No user is signed in.';
+                usernameElement.textContent = '';
+            }
+        }
+
+        deleteButton.addEventListener('click', () => {
+        const user = auth.currentUser;
+
+        if (user) {
+            const confirmation = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+
+            if (confirmation) {
+            user.delete().then(() => {
+                alert('Your account has been deleted successfully.');
+            }).catch((error) => {
+                console.error('Error deleting account:', error);
+                alert('There was an error deleting your account. Please try again.');
+            });
+            } else {
+            alert('Account deletion cancelled.');
+            }
+        } else {
+            alert('No user is currently logged in.');
+        }
+        });
+
+        function addClass() {
+            const searchValue = document.getElementById("search-bar").value.toUpperCase().trim();
+            const lectureNumber = document.getElementById("lecture-number").value.trim();
+            const user = auth.currentUser;
+
+            if (user && searchValue && lectureNumber) {
+                // Find the first number in the searchValue
+                const index = findFirstNumberIndex(searchValue);
+                
+                if (index === -1) {
+                    alert('Invalid format: Please include a valid department and course number.');
+                    return;
+                }
+
+                const dept = searchValue.slice(0, index).trim();
+                const code = searchValue.slice(index).trim();
+
+                if (!dept || !code) {
+                    alert('Please ensure the search bar contains a department and course code.');
+                    return;
+                }
+
+                // Create a new class object
+                const newClass = { dept, num: code, lecture: lectureNumber };
+
+                // Reference to the user's document
+                const userRef = doc(db, 'users', user.email);
+
+                // Add the new class to Firestore
+                setDoc(userRef, { classes: arrayUnion(newClass) }, { merge: true })
+                    .then(() => {
+                        alert('Class added successfully!');
+                        updateClassesList([...currentClasses, newClass]); // Update the class list in UI
+                    })
+                    .catch((error) => {
+                        console.error('Error adding class:', error);
+                        alert('There was an error adding the class. Please try again.');
+                    });
+            } else {
+                alert('Please provide both a class and a lecture number.');
+            }
+        }
+
+        addClassButton.addEventListener('click', function() {
+            addClass();
+        });
+
+        function findFirstNumberIndex(str) {
+            const regex = /\d+/;
+            const match = str.match(regex);
+            return match ? str.indexOf(match[0]) : -1;
+        }
+
+        function updateClassesList(classes = []) {
+            const classesListElement = document.getElementById('classesList');
+            classesListElement.innerHTML = ''; // Clear existing list items
+
+            classes.forEach(cls => {
+                const li = document.createElement('li');
+                li.textContent = `${cls.dept} ${cls.num}: LEC ${cls.lecture}`; // Display the lecture information
+                classesListElement.appendChild(li);
+            });
+        }
+
+        async function logOut() {
+            try {
+                await signOut(auth);
+                console.log('User signed out successfully');
+                window.location.href = 'login.html'; 
+            } catch (error) {
+                console.error('Error signing out:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoutButton = document.getElementById('logoutButton');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', logOut);
+            }
+            
+            onAuthStateChanged(auth, (user) => {
+                updateUI(user);
+            });
+        });
+    </script>
+</body>
+</html>

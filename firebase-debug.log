@@ -1,0 +1,81 @@
+[debug] [2024-07-05T19:56:01.890Z] ----------------------------------------------------------------------
+[debug] [2024-07-05T19:56:01.893Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\abhi0\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2024-07-05T19:56:01.894Z] CLI Version:   13.13.0
+[debug] [2024-07-05T19:56:01.894Z] Platform:      win32
+[debug] [2024-07-05T19:56:01.894Z] Node Version:  v20.15.0
+[debug] [2024-07-05T19:56:01.894Z] Time:          Fri Jul 05 2024 14:56:01 GMT-0500 (Central Daylight Time)
+[debug] [2024-07-05T19:56:01.894Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-07-05T19:56:02.021Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-07-05T19:56:02.022Z] > authorizing via signed-in user (apasupula@wisc.edu)
+[debug] [2024-07-05T19:56:02.022Z] [iam] checking project schedulingapp-a25b5 for permissions ["firebase.projects.get"]
+[debug] [2024-07-05T19:56:02.023Z] > refreshing access token with scopes: []
+[debug] [2024-07-05T19:56:02.025Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-07-05T19:56:02.025Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-07-05T19:56:02.325Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-07-05T19:56:02.326Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-07-05T19:56:02.337Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/schedulingapp-a25b5:testIamPermissions [none]
+[debug] [2024-07-05T19:56:02.338Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/schedulingapp-a25b5:testIamPermissions x-goog-quota-user=projects/schedulingapp-a25b5
+[debug] [2024-07-05T19:56:02.338Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/schedulingapp-a25b5:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-07-05T19:56:02.706Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/schedulingapp-a25b5:testIamPermissions 200
+[debug] [2024-07-05T19:56:02.706Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/schedulingapp-a25b5:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-07-05T19:56:02.707Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5 [none]
+[debug] [2024-07-05T19:56:02.972Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5 200
+[debug] [2024-07-05T19:56:02.972Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5 {"projectId":"schedulingapp-a25b5","projectNumber":"152584929896","displayName":"SchedulingApp","name":"projects/schedulingapp-a25b5","resources":{"hostingSite":"schedulingapp-a25b5"},"state":"ACTIVE","etag":"1_83770f97-d0f8-41c6-9826-136a01822467"}
+[info] 
+[info] === Serving from 'C:\Users\abhi0\Documents\app'...
+[info] 
+[debug] [2024-07-05T19:56:02.981Z] defaultcredentials: writing to file C:\Users\abhi0\AppData\Roaming\firebase\apasupula_wisc_edu_application_default_credentials.json
+[debug] [2024-07-05T19:56:02.981Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/schedulingapp-a25b5/sites 
+[debug] [2024-07-05T19:56:02.985Z] Setting GAC to C:\Users\abhi0\AppData\Roaming\firebase\apasupula_wisc_edu_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\abhi0\\AppData\\Roaming\\firebase\\apasupula_wisc_edu_application_default_credentials.json"}}
+[debug] [2024-07-05T19:56:02.985Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5/adminSdkConfig [none]
+[debug] [2024-07-05T19:56:03.152Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5/adminSdkConfig 200
+[debug] [2024-07-05T19:56:03.152Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5/adminSdkConfig {"projectId":"schedulingapp-a25b5","storageBucket":"schedulingapp-a25b5.appspot.com"}
+[debug] [2024-07-05T19:56:03.525Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/schedulingapp-a25b5/sites 200
+[debug] [2024-07-05T19:56:03.525Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/schedulingapp-a25b5/sites {"sites":[{"name":"projects/schedulingapp-a25b5/sites/schedulingapp-a25b5","defaultUrl":"https://schedulingapp-a25b5.web.app","appId":"1:152584929896:web:ed07cf4315265310a331dd","type":"DEFAULT_SITE"}]}
+[debug] [2024-07-05T19:56:03.526Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5/webApps/1:152584929896:web:ed07cf4315265310a331dd/config [none]
+[debug] [2024-07-05T19:56:03.767Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5/webApps/1:152584929896:web:ed07cf4315265310a331dd/config 200
+[debug] [2024-07-05T19:56:03.767Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5/webApps/1:152584929896:web:ed07cf4315265310a331dd/config {"projectId":"schedulingapp-a25b5","appId":"1:152584929896:web:ed07cf4315265310a331dd","storageBucket":"schedulingapp-a25b5.appspot.com","apiKey":"AIzaSyAtny8BZLxTw7QMm7xqwdDrgJav1SfXH8E","authDomain":"schedulingapp-a25b5.firebaseapp.com","messagingSenderId":"152584929896","measurementId":"G-RCP89W9GRZ"}
+[debug] [2024-07-05T19:56:03.781Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5 [none]
+[debug] [2024-07-05T19:56:03.900Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5 200
+[debug] [2024-07-05T19:56:03.900Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/schedulingapp-a25b5 {"projectId":"schedulingapp-a25b5","projectNumber":"152584929896","displayName":"SchedulingApp","name":"projects/schedulingapp-a25b5","resources":{"hostingSite":"schedulingapp-a25b5"},"state":"ACTIVE","etag":"1_83770f97-d0f8-41c6-9826-136a01822467"}
+[info] i  functions: Watching "C:\Users\abhi0\Documents\app\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\abhi0\\Documents\\app\\functions\" for Cloud Functions..."}}
+[info] i  hosting[schedulingapp-a25b5]: Serving hosting files from: Documents/app {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mDocuments/app\u001b[22m"}}
+[info] +  hosting[schedulingapp-a25b5]: Local server: http://localhost:5002 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5002\u001b[22m\u001b[24m"}}
+[debug] [2024-07-05T19:56:03.923Z] Validating nodejs source
+[debug] [2024-07-05T19:56:05.343Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2024-07-05T19:56:05.343Z] Building nodejs source
+[debug] [2024-07-05T19:56:05.344Z] Failed to find version of module node: reached end of search path C:\Users\abhi0\Documents\app\functions\node_modules
+[warn] !  functions: Your requested "node" version "18" doesn't match your global version "20". Using node@20 from host. 
+[debug] [2024-07-05T19:56:05.347Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-07-05T19:56:05.354Z] Found firebase-functions binary at 'C:\Users\abhi0\Documents\app\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8943
+
+[debug] [2024-07-05T19:56:05.819Z] Got response from /__/functions.yaml {"endpoints":{"helloWorld":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] +  functions: Loaded functions definitions from source: helloWorld. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: helloWorld."}}
+[info] +  functions[us-central1-helloWorld]: http function initialized (http://localhost:5001/schedulingapp-a25b5/us-central1/helloWorld). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://localhost:5001/schedulingapp-a25b5/us-central1/helloWorld)."}}
