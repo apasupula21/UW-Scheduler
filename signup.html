@@ -5,75 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Page</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-      }
-      .signup-container {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        width: 300px;
-      }
-      .signup-container h2 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .form-group {
-        margin-bottom: 15px;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-      .form-group input[type="text"], 
-      .form-group input[type="password"] {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-size: 16px;
-      }
-      .form-group button#signupButton {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 4px;
-        font-size: 16px;
-      }
-      .form-group button#signupButton:hover {
-        background-color: #0056b3;
-      }
-      .form-group button#loginButton {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 4px;
-        font-size: 16px; 
-      }
-      .form-group button#loginButton:hover {
-        background-color: #0056b3;
-      }
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+        /* Styles for the body of the document */
+        body {
+            font-family: "Poppins", sans-serif; /* Use the Poppins font for the entire page */
+            background-color: #f5f7f9; /* Light gray background color */
+            display: flex; /* Use flexbox to center content */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+        }
+
+        /* Styles for the signup container */
+        .signup-container {
+            background-color: #ffffff; /* White background for the container */
+            padding: 30px; /* Padding inside the container */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+            width: 100%; /* Full width with max-width constraint */
+            max-width: 400px; /* Maximum width of the container */
+        }
+
+        /* Styles for the heading */
+        .signup-container h2 {
+            text-align: center; /* Center-align the heading text */
+            margin-bottom: 30px; /* Space below the heading */
+            color: #333; /* Dark gray color for the text */
+            font-weight: 600; /* Bold text */
+        }
+
+        /* Styles for form groups */
+        .form-group {
+            margin-bottom: 20px; /* Space below each form group */
+        }
+
+        /* Styles for labels inside form groups */
+        .form-group label {
+            display: block; /* Block display for labels */
+            margin-bottom: 8px; /* Space below the label */
+            font-weight: 500; /* Semi-bold text */
+            color: #555; /* Medium gray color for text */
+        }
+
+        /* Styles for text and password input fields */
+        .form-group input[type="text"], 
+        .form-group input[type="password"] {
+            width: 100%; /* Full width input fields */
+            padding: 12px; /* Padding inside input fields */
+            border: 1px solid #ddd; /* Light gray border */
+            border-radius: 6px; /* Slightly rounded corners */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+            font-size: 16px; /* Font size for input text */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+        }
+
+        /* Styles for input fields when focused */
+        .form-group input:focus {
+            border-color: #007bff; /* Blue border color when focused */
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25); /* Blue shadow when focused */
+            outline: none; /* Remove default outline */
+        }
+
+        /* Styles for buttons inside form groups */
+        .form-group button {
+            background-color: #007bff; /* Blue background color */
+            color: #ffffff; /* White text color */
+            border: none; /* Remove default border */
+            padding: 12px; /* Padding inside button */
+            cursor: pointer; /* Pointer cursor on hover */
+            border-radius: 6px; /* Slightly rounded corners */
+            font-size: 16px; /* Font size for button text */
+            width: 100%; /* Full width button */
+            margin-top: 10px; /* Space above the button */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition effects */
+        }
+
+        /* Styles for button hover effects */
+        .form-group button:hover {
+            background-color: #0056b3; /* Darker blue background on hover */
+            transform: scale(1.02); /* Slightly enlarge button on hover */
+        }
+
+        /* Styles for the back button */
+        .form-group .back-button {
+            background-color: #6c757d; /* Gray background color */
+        }
+
+        /* Styles for the back button hover effects */
+        .form-group .back-button:hover {
+            background-color: #5a6268; /* Darker gray background on hover */
+        }
+
+        /* Remove focus outline for the back button */
+        .form-group .back-button:focus {
+            outline: none;
+        }
     </style>
 </head>
 <body>
+    <!-- JavaScript module to handle Firebase integration and form logic -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';
         import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';
         import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
 
+        // Firebase configuration object
         const firebaseConfig = {
             apiKey: "CONFIDENTIAL",
             authDomain: "CONFIDENTIAL",
@@ -84,78 +122,108 @@
             measurementId: "CONFIDENTIAL"
         };
 
+        // Initialize Firebase app and services
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        // Event listener for DOMContentLoaded to ensure the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', function() {
-          const signupButton = document.getElementById('signupButton');
-          const loginButton = document.getElementById('loginButton');
+            const signupButton = document.getElementById('signupButton');
+            const loginButton = document.getElementById('loginButton');
 
-          signupButton.addEventListener('click', async function() {
-            const email = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const name = document.getElementById('name').value;
+            // Event listener for the sign-up button
+            signupButton.addEventListener('click', async function() {
+                const email = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const name = document.getElementById('name').value.trim();
 
+                // Validate that the name field is not empty
+                if (!name) {
+                    alert("Name field cannot be empty. Please enter your name.");
+                    return;
+                }
 
-            if (validateEmail(email)) {
-              try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-                console.log('User signed up:', user);
+                // Validate that passwords match
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match. Please check and try again.");
+                    return;
+                }
 
-                // Add user data to Firestore
-                await setDoc(doc(db, 'users', user.email), {
-                  name: name,
-                  uid: user.uid,
-                  classes: [],
-                  createdAt: new Date()
-                });
+                // Validate email format
+                if (validateEmail(email)) {
+                    try {
+                        // Create a new user with email and password
+                        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                        const user = userCredential.user;
+                        console.log('User signed up:', user);
 
-                console.log('User data added to Firestore');
-                alert("Signed up successfully!");
-                window.location.href = "myaccount.html"; // Redirect after signup
-              } catch (error) {
-                console.error('Error signing up:', error);
-                alert("Error signing up: " + error.message);
-              }
-            } else {
-              alert("Invalid email format");
+                        // Save additional user information to Firestore
+                        await setDoc(doc(db, 'users', user.email), {
+                            name: name,
+                            uid: user.uid,
+                            classes: [],
+                            createdAt: new Date()
+                        });
+
+                        console.log('User data added to Firestore');
+                        alert("Signed up successfully!");
+                        window.location.href = "myaccount.html"; // Redirect to account page
+                    } catch (error) {
+                        console.error('Error signing up:', error);
+                        alert("Error signing up: " + error.message);
+                    }
+                } else {
+                    alert("Invalid email format");
+                }
+            });
+
+            // Event listener for the login button
+            loginButton.addEventListener('click', function() {
+                window.location.href = "login.html"; // Redirect to login page
+            });
+
+            // Function to validate email format
+            function validateEmail(email) {
+                const validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return validRegex.test(email);
             }
-          });
-
-          loginButton.addEventListener('click', function() {
-            window.location.href = "login.html";
-          });
-
-          function validateEmail(email) {
-            const validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return validRegex.test(email);
-          }
         });
     </script>
-    <div class="signup-container">
-      <h2>Sign Up</h2>
-      <form id="signupForm" onsubmit="return false;">
-        <div class="form-group">
+    <!-- HTML structure for the sign-up form -->
+<div class="signup-container">
+  <h2>Sign Up</h2>
+  <form id="signupForm" onsubmit="return false;">
+      <!-- Input field for the user's name -->
+      <div class="form-group">
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="username">Username:</label>
+      </div>
+      <!-- Input field for the user's email -->
+      <div class="form-group">
+          <label for="username">Email:</label>
           <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
+      </div>
+      <!-- Input field for the user's password -->
+      <div class="form-group">
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
+      </div>
+      <!-- Input field for confirming the user's password -->
+      <div class="form-group">
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required>
+      </div>
+      <!-- Button to submit the form and trigger sign up -->
+      <div class="form-group">
           <button type="button" id="signupButton">Sign Up</button>
-        </div>
-        <div class="form-group">
-          <button type="button" id="loginButton">Back to Login Page</button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <!-- Button to navigate back to the login page -->
+      <div class="form-group">
+          <button type="button" id="loginButton" class="back-button">Back to Login Page</button>
+      </div>
+  </form>
+</div>
 </body>
 </html>

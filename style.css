@@ -1,88 +1,130 @@
+/* Import the Poppins font from Google Fonts with various font weights */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* Universal styles for all elements */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  font-family: "Poppins", sans-serif; /* Apply Poppins font to all elements */
 }
 
+/* Style for the body element */
 body {
-  background: #644bff;
-  padding: 0 20px;
+  background: #644bff; /* Set background color */
+  color: #000; /* Set text color */
+  padding: 0 20px; /* Apply horizontal padding */
 }
 
+/* Style for text selection */
 ::selection {
-  color: #fff;
-  background: #664aff;
+  color: #fff; /* Set text color when selected */
+  background: #664aff; /* Set background color when selected */
 }
 
+/* Container for the search input and related elements */
 .wrapper {
-  max-width: 450px;
-  margin: 150px auto;
+  max-width: 450px; /* Set maximum width of the container */
+  margin: 150px auto; /* Center the container horizontally and add vertical margin */
 }
 
+/* Styles for the search input container */
 .wrapper .search-input {
-  background: #fff;
-  width: 100%;
-  border-radius: 5px;
-  position: relative;
-  box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+  background: #fff; /* Set background color */
+  width: 100%; /* Make the container full width */
+  border-radius: 5px; /* Apply border radius for rounded corners */
+  position: relative; /* Position relative for absolute positioning of child elements */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.12); /* Add shadow effect */
 }
 
+/* Styles for the input field inside the search input container */
 .search-input input {
-  height: 55px;
-  width: 100%;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  padding: 0 60px 0 20px;
-  font-size: 18px;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  height: 55px; /* Set height of the input field */
+  width: calc(100% - 55px); /* Set width to fill container minus space for icon */
+  outline: none; /* Remove default outline */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Apply border radius for rounded corners */
+  padding: 0 60px 0 20px; /* Apply padding inside the input field */
+  font-size: 18px; /* Set font size */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+  color: #000; /* Set text color */
+  transition: box-shadow 0.3s ease; /* Smooth transition for shadow effect on focus */
 }
 
+/* Style for input field when focused */
+.search-input input:focus {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Increase shadow effect on focus */
+}
+
+/* Adjust border-radius when the search input is active */
 .search-input.active input {
-  border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0; /* Round top corners only */
 }
 
-.search-input .autocom-box {
-  padding: 0;
-  opacity: 0;
-  pointer-events: none;
-  max-height: 280px;
-  overflow-y: auto;
-}
-
-.search-input.active .autocom-box {
-  padding: 10px 8px;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.autocom-box li {
-  list-style: none;
-  padding: 8px 12px;
-  display: none;
-  width: 100%;
-  cursor: default;
-  border-radius: 3px;
-}
-
-.search-input.active .autocom-box li {
-  display: block;
-}
-.autocom-box li:hover {
-  background: #efefef;
-}
-
+/* Styles for the icon inside the search input container */
 .search-input .icon {
-  position: absolute;
-  right: 0px;
-  top: 17px;
-  height: 55px;
-  width: 55px;
-  text-align: center;
-  line-height: 55px;
-  font-size: 20px;
-  color: #644bff;
-  cursor: pointer;
+  position: absolute; /* Position absolutely inside the container */
+  right: 0; /* Align icon to the right */
+  top: 0; /* Align icon to the top */
+  height: 55px; /* Set height to match the input field */
+  width: 55px; /* Set width */
+  text-align: center; /* Center text horizontally */
+  line-height: 55px; /* Center text vertically */
+  font-size: 20px; /* Set font size */
+  color: #644bff; /* Set icon color */
+  cursor: pointer; /* Show pointer cursor on hover */
+  background: #fff; /* Set background color */
+  border-left: 1px solid #ddd; /* Add left border */
+  transition: background 0.3s ease, color 0.3s ease; /* Smooth transition for background and color on hover */
+}
+
+/* Style for the icon on hover */
+.search-input .icon:hover {
+  background: #f1f1f1; /* Change background color */
+  color: #333; /* Change text color */
+}
+
+/* Styles for the autocomplete box */
+.search-input .autocom-box {
+  padding: 10px 0; /* Apply vertical padding */
+  opacity: 0; /* Initially hide the autocomplete box */
+  pointer-events: none; /* Disable pointer events */
+  max-height: 280px; /* Set maximum height */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  background: #fff; /* Set background color */
+  border-radius: 0 0 5px 5px; /* Round bottom corners only */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.12); /* Add shadow effect */
+  position: absolute; /* Position absolutely within the container */
+  width: 100%; /* Make the box full width */
+  top: 55px; /* Position below the input field */
+  left: 0; /* Align box to the left edge */
+  transition: opacity 0.3s ease, max-height 0.3s ease; /* Smooth transition for opacity and max-height */
+}
+
+/* Show autocomplete box when search input is active */
+.search-input.active .autocom-box {
+  opacity: 1; /* Make the box visible */
+  pointer-events: auto; /* Enable pointer events */
+}
+
+/* Styles for list items in the autocomplete box */
+.autocom-box li {
+  list-style: none; /* Remove default list style */
+  padding: 8px 12px; /* Apply padding */
+  display: none; /* Hide items initially */
+  width: 100%; /* Make items full width */
+  cursor: pointer; /* Show pointer cursor on hover */
+  border-radius: 3px; /* Apply border radius for rounded corners */
+  color: #000; /* Set text color */
+  transition: background 0.3s ease; /* Smooth transition for background color on hover */
+}
+
+/* Show list items when the autocomplete box is active */
+.search-input.active .autocom-box li {
+  display: block; /* Make items visible */
+}
+
+/* Style for list items on hover */
+.autocom-box li:hover {
+  background: #efefef; /* Change background color */
 }

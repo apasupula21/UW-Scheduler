@@ -1,131 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata for the HTML document -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account</title>
     <style>
+        /* Basic styling for the body */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 20px;
+            margin: 0;
+            background: #e9f1f7; /* Light background color */
         }
+
+        /* Header styling */
+        header {
+            background-color: #007bff; /* Blue background for the header */
+            color: #fff; /* White text color */
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure header stays on top */
+        }
+
+        /* Header title styling */
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        /* Container styling for the main content */
         .container {
-            max-width: 600px;
-            margin: auto;
+            max-width: 800px;
+            margin: 80px auto 20px auto; /* Centered with margin from header */
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            background-color: #ffffff; /* White background */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
         }
-        .button, .btn, .add-class, .login-button {
+
+        /* Styling for buttons */
+        .button, .find-classes-button {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #007bff; /* Blue background */
             color: white;
             border: none;
             cursor: pointer;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth color transition */
+            margin: 5px; /* Margin for spacing */
         }
-        .button:hover, .btn:hover, .add-class:hover, .login-button:hover {
-            background-color: #0056b3;
+
+        /* Button hover effect */
+        .button:hover, .find-classes-button:hover {
+            background-color: #0056b3; /* Darker blue */
         }
+
+        /* Heading styling */
         h2 {
             text-align: center;
+            color: #333; /* Dark text color */
+            margin-bottom: 20px;
         }
+
+        /* User info section styling */
         .user-info {
             margin-bottom: 20px;
         }
+
         .user-info label {
-            font-weight: bold;
+            font-weight: bold; /* Bold labels */
+            display: block;
+            margin-bottom: 5px;
         }
+
         .user-info p {
-            margin: 5px 0;
+            margin: 0;
+            padding: 10px;
+            background-color: #f1f1f1; /* Light gray background */
+            border-radius: 4px; /* Rounded corners */
         }
+
+        /* Classes list styling */
         .classes-list {
             margin-top: 20px;
         }
+
+        .classes-list h3 {
+            margin-bottom: 15px;
+            color: #333; /* Dark text color */
+        }
+
         .classes-list ul {
-            list-style-type: none;
+            list-style-type: none; /* Remove default list styling */
             padding: 0;
         }
+
         .classes-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9; /* Light gray background */
+            border-radius: 4px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
         }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
+
+        .classes-list li span {
+            font-size: 16px;
+            color: #333; /* Dark text color */
         }
-        nav {
-            background-color: #f2f2f2;
-            text-align: center;
-            padding: 10px 0;
+
+        .classes-list button {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 4px; /* Rounded corners */
         }
-        nav a {
-            text-decoration: none;
-            color: #333;
-            padding: 10px 20px;
-        }
-        nav a:hover {
-            background-color: #ddd;
-        }
+
+        /* Footer styling */
         footer {
-            background-color: #333;
-            color: #fff;
+            background-color: #007bff; /* Blue background */
+            color: #fff; /* White text color */
             text-align: center;
-            padding: 10px 0;
-            position: absolute;
+            padding: 10px;
+            position: fixed;
             bottom: 0;
             width: 100%;
         }
+
+        /* Search container styling */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        /* Search input styling */
+        .search-input {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin-right: 20px;
+        }
+
+        .search-input input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 4px; /* Rounded corners */
+            margin-right: 10px; /* Spacing between inputs */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+        }
+
+        /* Button container styling */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Dropdown container styling */
+        .dropdown-container {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .dropdown-container label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333; /* Dark text color */
+        }
+
+        .dropdown {
+            padding: 10px;
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 4px; /* Rounded corners */
+            background-color: #fff; /* White background */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+            font-size: 16px;
+            cursor: pointer;
+            appearance: none; /* Remove default styling */
+        }
+
+        /* Add class button styling */
+        .add-class-button {
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue background */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth color transition */
+            margin-top: 20px; /* Spacing above button */
+        }
+
+        /* Add class button hover effect */
+        .add-class-button:hover {
+            background-color: #0056b3; /* Darker blue */
+        }
+
+        /* Student card styling */
+        .student-card {
+            background-color: #ffffff; /* White background */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+            margin: 10px 0;
+            padding: 15px;
+            text-align: left;
+            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover effects */
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px); /* Slight lift effect on hover */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+        }
+
+        /* No students message styling */
+        .no-students {
+            color: #888; /* Gray color for no students message */
+        }
+
+        /* Reset list styling */
+        ul {
+            list-style-type: none; /* Remove default list styling */
+            padding: 0;
+            margin: 0;
+        }
     </style>
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/1cf483120b.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Main container for search input and class management -->
     <div class="wrapper">
         <div class="search-input">
+            <!-- Hidden anchor tag, possibly for future use or debugging -->
             <a href="" target="_blank" hidden></a>
-               <input type="text" placeholder="Type to search.." id = "search-bar">
-               <input type="text" placeholder="Lecture Number" id="lecture-number">
-               <div class="autocom-box">
-               </div>
-               <div class="icon"><i class="fas fa-search"></i></div>
+            <!-- Input for typing the class search query -->
+            <input type="text" placeholder="Type to search.." id="search-bar">
+            <!-- Dropdown for autocomplete suggestions (not implemented here) -->
+            <div class="autocom-box"></div>
+            <!-- Input for lecture number -->
+            <input type="text" placeholder="Lecture Number" id="lecture-number">
         </div>
-        <script type = "module" src="index.js"></script>
-        </div>
+        <div class="button-container">
+            <!-- Dropdown for selecting semester -->
+            <div class="dropdown-container">
+                <select id="semester-select" class="dropdown">
+                    <option value="" disabled selected>Select Semester</option>
+                    <option value="fall">Fall</option>
+                    <option value="spring">Spring</option>
+                    <option value="summer">Summer</option>
+                </select>
+            </div>
+            <!-- Dropdown for selecting year -->
+            <div class="dropdown-container">
+                <select id="year-select" class="dropdown">
+                    <option value="" disabled selected>Select Year</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                </select>
+            </div>
+            <!-- Button to add a class -->
+            <button type="button" id="addClassButton" class="add-class-button">Add Class</button>
+        </div>        
+    </div>
+
+    <!-- Container for user account information and enrolled classes -->
     <div class="container">
         <h2>My Account</h2>
+        <!-- Display user name -->
         <div class="user-info">
             <label for="username">Name:</label>
             <p id="username"></p>
         </div>
+        <!-- Display user email -->
         <div class="user-info">
             <label for="email">Email:</label>
             <p id="userEmail"></p>
         </div>
         
+        <!-- List of enrolled classes -->
         <div class="classes-list">
             <h3>Enrolled Classes:</h3>
-            <ul id="classesList">
-                <!-- Classes will be dynamically added here -->
-            </ul>
+            <ul id="classesList"></ul>
         </div>
+        <!-- List of students in a class (initially empty) -->
+        <ul id="studentsList"></ul>
         <div style="text-align: center;">
-            <button type = "button" id = "addClassButton" class = "button">Add Class</Button>
-            <button type = "button" id = "deleteButton" class = "button">Delete Account</button>
+            <!-- Button to delete the account -->
+            <button type="button" id="deleteButton" class="button">Delete Account</button>
+            <!-- Button to log out -->
             <button type="button" id="logoutButton" class="button">Log Out</button>
         </div>
     </div>
 
+    <!-- Import JavaScript modules for Firebase -->
+    <script type="module" src="index.js"></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';
         import { getAuth, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';
-        import { getFirestore, collection, doc, getDoc, setDoc, arrayUnion } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
+        import { getFirestore, collection, doc, getDoc, setDoc, arrayUnion, getDocs, query, where, deleteDoc, updateDoc, arrayRemove } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
 
-        // Firebase configuration
+        // Firebase configuration object
         const firebaseConfig = {
             apiKey: "CONFIDENTIAL",
             authDomain: "CONFIDENTIAL",
@@ -136,19 +331,21 @@
             measurementId: "CONFIDENTIAL"
         };
 
-        // Initialize Firebase
+
+        // Initialize Firebase app and services
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Set auth persistence
+        // Set persistence for Firebase authentication
         setPersistence(auth, browserLocalPersistence)
             .catch((error) => {
                 console.error('Error setting persistence:', error);
             });
 
-        let currentClasses = []; // Declare a global variable to hold the current classes
+        let currentClasses = [];
 
+        // Retrieve user document from Firestore
         async function gettingDoc(user) {
             const docRef = doc(db, 'users', user.email);
             const docSnap = await getDoc(docRef);
@@ -156,13 +353,14 @@
 
             if (docSnap.exists()) {
                 usernameElement.textContent = docSnap.data().name;
-                currentClasses = docSnap.data().classes || []; // Initialize currentClasses
-                updateClassesList(currentClasses); // Update the UI with current classes
+                currentClasses = docSnap.data().classes || [];
+                updateClassesList(currentClasses);
             } else {
                 console.log("No such document!");
             }
         }
 
+        // Update the UI based on the current user's state
         function updateUI(user) {
             const userEmailElement = document.getElementById('userEmail');
             const usernameElement = document.getElementById('username');
@@ -175,36 +373,51 @@
             }
         }
 
+        // Event listener for account deletion
         deleteButton.addEventListener('click', () => {
-        const user = auth.currentUser;
-
-        if (user) {
-            const confirmation = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
-
-            if (confirmation) {
-            user.delete().then(() => {
-                alert('Your account has been deleted successfully.');
-            }).catch((error) => {
-                console.error('Error deleting account:', error);
-                alert('There was an error deleting your account. Please try again.');
-            });
-            } else {
-            alert('Account deletion cancelled.');
-            }
-        } else {
-            alert('No user is currently logged in.');
-        }
-        });
-
-        function addClass() {
-            const searchValue = document.getElementById("search-bar").value.toUpperCase().trim();
-            const lectureNumber = document.getElementById("lecture-number").value.trim();
             const user = auth.currentUser;
 
+            if (user) {
+                const confirmation = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+
+                if (confirmation) {
+                    user.delete().then(() => {
+                        alert('Your account has been deleted successfully.');
+                    }).catch((error) => {
+                        console.error('Error deleting account:', error);
+                        alert('There was an error deleting your account. Please try again.');
+                    });
+                } else {
+                    alert('Account deletion cancelled.');
+                }
+            } else {
+                alert('No user is currently logged in.');
+            }
+        });
+
+        // Add a new class to the database and user's classes
+        async function addClass() {
+            const searchValue = document.getElementById("search-bar").value.toUpperCase().trim();
+            const lectureNumber = document.getElementById("lecture-number").value.trim();
+            const year = document.getElementById("year-select").value.trim();
+            const semester = document.getElementById("semester-select").value.trim();
+            const user = auth.currentUser;
+
+            const allowedLectures = ['001', '002', '003', '004', '005'];
+
             if (user && searchValue && lectureNumber) {
-                // Find the first number in the searchValue
+                if (!allowedLectures.includes(lectureNumber)) {
+                    alert('Invalid lecture number: Please enter a valid lecture number (001, 002, 003, 004, or 005).');
+                    return;
+                }
+
+                if (!searchValue || !lectureNumber || !semester || !year) {
+                    alert('Please fill in all required fields: class, lecture number, semester, and year.');
+                    return;
+                }
+
                 const index = findFirstNumberIndex(searchValue);
-                
+
                 if (index === -1) {
                     alert('Invalid format: Please include a valid department and course number.');
                     return;
@@ -218,66 +431,235 @@
                     return;
                 }
 
-                // Create a new class object
-                const newClass = { dept, num: code, lecture: lectureNumber };
+                const classId = `${dept}_${code}_${lectureNumber}_${semester}_${year}`;
+                const newClass = { dept, num: code, lecture: lectureNumber, sem: semester, yr: year};
 
-                // Reference to the user's document
-                const userRef = doc(db, 'users', user.email);
+                const classRef = doc(db, 'classes', classId);
+                const classSnapshot = await getDoc(classRef);
 
-                // Add the new class to Firestore
-                setDoc(userRef, { classes: arrayUnion(newClass) }, { merge: true })
-                    .then(() => {
-                        alert('Class added successfully!');
-                        updateClassesList([...currentClasses, newClass]); // Update the class list in UI
-                    })
-                    .catch((error) => {
-                        console.error('Error adding class:', error);
-                        alert('There was an error adding the class. Please try again.');
-                    });
+                try {
+                    let name = '';
+
+                    const userRef = doc(db, 'users', user.email);
+                    const userSnap = await getDoc(userRef);
+
+                    if (userSnap.exists()) {
+                        name = userSnap.data().name;
+                    } else {
+                        console.log("User document not found!");
+                        alert('Error retrieving user data.');
+                        return;
+                    }
+
+                    if (classSnapshot.exists()) {
+                        await updateDoc(classRef, {
+                            students: arrayUnion(name)
+                        });
+                        alert('You have been added as a student.');
+
+                    } else {
+                        await setDoc(classRef, { ...newClass, students: [name] });
+                        alert('You have been added as a student.');
+                    }
+
+                    document.getElementById("search-bar").value = '';
+                    document.getElementById("lecture-number").value = '';
+                    document.getElementById("year-select").value = '';
+                    document.getElementById("semester-select").value = '';
+
+                    await setDoc(userRef, { classes: arrayUnion(newClass) }, { merge: true });
+
+                    updateClassesList([...currentClasses, newClass]);
+
+                } catch (error) {
+                    console.error('Error creating or updating class:', error);
+                    alert('There was an error creating or updating the class. Please try again.');
+                }
             } else {
                 alert('Please provide both a class and a lecture number.');
             }
         }
 
+        // Add event listener to the "Add Class" button to trigger the addClass function when clicked
         addClassButton.addEventListener('click', function() {
             addClass();
         });
 
+        // Function to find the index of the first number in a string
         function findFirstNumberIndex(str) {
-            const regex = /\d+/;
-            const match = str.match(regex);
-            return match ? str.indexOf(match[0]) : -1;
+            const regex = /\d+/; // Regular expression to match digits
+            const match = str.match(regex); // Find the first match
+            return match ? str.indexOf(match[0]) : -1; // Return index of the first number, or -1 if no match
         }
 
+        // Function to capitalize the first letter of a string
+        function capitalizeFirstLetter(str) {
+            if (!str) return str; // Return the string if it's empty
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase(); // Capitalize the first letter and make the rest lowercase
+        }
+
+        // Function to hide the students list and clear its content
+        function hideStudentsList() {
+            const studentsListElement = document.getElementById('studentsList');
+            if (studentsListElement) {
+                studentsListElement.innerHTML = ''; // Clear the content
+                studentsListElement.style.display = 'none'; // Hide the element
+            }
+        }
+
+        // Function to update the list of classes in the UI
         function updateClassesList(classes = []) {
             const classesListElement = document.getElementById('classesList');
-            classesListElement.innerHTML = ''; // Clear existing list items
+            classesListElement.innerHTML = ''; // Clear the existing list
 
+            // Iterate over each class and create UI elements
             classes.forEach(cls => {
-                const li = document.createElement('li');
-                li.textContent = `${cls.dept} ${cls.num}: LEC ${cls.lecture}`; // Display the lecture information
+                const li = document.createElement('li'); // Create a list item
+
+                const span = document.createElement('span'); // Create a span for class details
+                span.textContent = `${cls.dept} ${cls.num}: LEC ${cls.lecture}, ${capitalizeFirstLetter(cls.sem)} ${cls.yr}`; // Set text content
+
+                // Create a button to find classmates
+                const findButton = document.createElement('button');
+                findButton.textContent = 'Find Classmates';
+                findButton.className = 'find-classes-button'; // Set class for styling
+                findButton.onclick = () => {
+                    findMatches(cls.dept, cls.num, cls.lecture, cls.sem, cls.yr); // Call findMatches on click
+                };
+
+                // Create a button to delete the class
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete Class';
+                deleteButton.className = 'find-classes-button'; // Set class for styling
+                deleteButton.onclick = async () => {
+                    if (confirm('Are you sure you want to delete this class?')) { // Confirm deletion
+                        try {
+                            const user = auth.currentUser; // Get current user
+                            const classId = `${cls.dept}_${cls.num}_${cls.lecture}_${cls.sem.toLowerCase()}_${cls.yr}`; // Generate class ID
+                            const classRef = doc(db, 'classes', classId); // Reference to the class document
+                            
+                            let name = '';
+
+                            const userRef = doc(db, 'users', user.email); // Reference to user document
+                            const userSnap = await getDoc(userRef); // Get user document
+
+                            if (userSnap.exists()) {
+                                name = userSnap.data().name; // Extract user name
+                            } else {
+                                console.log("User document not found!");
+                                alert('Error retrieving user data.');
+                                return;
+                            }
+
+                            if (user) {
+                                // Update class document by removing the user
+                                await updateDoc(classRef, {
+                                    students: arrayRemove(name)
+                                });
+
+                                // Update user document by removing the class
+                                await updateDoc(userRef, {
+                                    classes: arrayRemove(cls)
+                                });
+
+                                // Update the classes list in the UI
+                                updateClassesList(classes.filter(c => c !== cls));
+
+                                hideStudentsList(); // Hide the students list
+
+                                alert('Class deleted successfully!');
+                            } else {
+                                alert('No user is currently logged in.');
+                            }
+                        } catch (error) {
+                            console.error('Error deleting class:', error);
+                            alert('There was an error deleting the class. Please try again.');
+                        }
+                    }
+                };
+
+                // Append the created elements to the list item
+                li.appendChild(span);
+                li.appendChild(findButton);
+                li.appendChild(deleteButton);
+
+                // Append the list item to the classes list
                 classesListElement.appendChild(li);
             });
         }
 
+        // Function to find matches for a specific class
+        async function findMatches(dept, num, lecture, sem, year) {
+            try {
+                const classId = `${dept}_${num}_${lecture}_${sem}_${year}`; // Generate class ID
+                const classRef = doc(db, 'classes', classId); // Reference to the class document
+
+                const classDoc = await getDoc(classRef); // Get class document
+
+                if (classDoc.exists()) {
+                    const students = classDoc.data().students || []; // Get students list
+                    displayStudents(students); // Display students
+                } else {
+                    alert('Class not found. Please check the department, course number, and lecture number.');
+                }
+            } catch (error) {
+                console.error('Error fetching class data:', error);
+                alert('There was an error retrieving the class data. Please check the console for more details.');
+            }
+        }
+
+        // Function to display the list of students
+        function displayStudents(students) {
+            const studentsListElement = document.getElementById('studentsList');
+
+            if (!studentsListElement) {
+                console.error('The element with ID "studentsList" does not exist.');
+                return;
+            }
+
+            studentsListElement.innerHTML = ''; // Clear existing content
+
+            if (students.length === 0) {
+                studentsListElement.innerHTML = '<li class="no-students">No students enrolled.</li>'; // Show message if no students
+            } else {
+                students.forEach(student => {
+                    const li = document.createElement('li'); // Create list item for each student
+                    li.classList.add('student-card'); // Add class for styling
+                    li.textContent = student; // Set text content
+                    studentsListElement.appendChild(li); // Append to list
+                });
+            }
+        }
+
+        // Function to search for a class (not currently linked to any input elements)
+        function searchForClass() {
+            const dept = document.getElementById('search-dept').value.trim().toUpperCase();
+            const num = document.getElementById('search-num').value.trim();
+            const lecture = document.getElementById('search-lecture').value.trim();
+
+            findMatches(dept, num, lecture); // Call findMatches with the search criteria
+        }
+
+        // Function to log out the current user
         async function logOut() {
             try {
-                await signOut(auth);
+                await signOut(auth); // Sign out the user
                 console.log('User signed out successfully');
-                window.location.href = 'login.html'; 
+                window.location.href = 'login.html'; // Redirect to login page
             } catch (error) {
                 console.error('Error signing out:', error);
             }
         }
 
+        // Set up event listeners and initialize user interface on page load
         document.addEventListener('DOMContentLoaded', () => {
             const logoutButton = document.getElementById('logoutButton');
             if (logoutButton) {
-                logoutButton.addEventListener('click', logOut);
+                logoutButton.addEventListener('click', logOut); // Add event listener for logout button
             }
-            
+
             onAuthStateChanged(auth, (user) => {
-                updateUI(user);
+                updateUI(user); // Update UI based on authentication state
             });
         });
     </script>
